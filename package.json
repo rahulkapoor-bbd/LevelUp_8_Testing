@@ -1,0 +1,21 @@
+{
+  "name": "levelup_8_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "jas_test": "jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jasmine": "^5.1.0",
+    "nodemon": "^3.0.1"
+  }
+}
