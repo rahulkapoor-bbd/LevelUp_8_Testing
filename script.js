@@ -1,16 +1,26 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('testForm');
+let displayValue = "";
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+function appendToDisplay(value) {
+    displayValue += value;
+    document.getElementById("display").value = displayValue;
+}
 
-        const formData = new FormData(form);
-        const formObject = {};
+function clearDisplay() {
+    displayValue = "";
+    document.getElementById("display").value = "";
+}
 
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
+function calculate() {
+    try {
+        displayValue = eval(displayValue);
+        document.getElementById("display").value = displayValue;
+    } catch (error) {
+        displayValue = "Error";
+        document.getElementById("display").value = displayValue;
+    }
+}
 
-        console.log('Form data:', formObject);
-    });
-});
+function backspace() {
+    displayValue = displayValue.slice(0, -1);
+    document.getElementById("display").value = displayValue;
+}
