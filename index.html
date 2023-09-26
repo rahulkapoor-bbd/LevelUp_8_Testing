@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-4">
+        <h1>Basic Calculator</h1>
+    </header>
+    <main class="container mt-4">
+        <div class="calculator">
+            <div class="form-group">
+                <input type="text" class="form-control" id="display" readonly>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('7')">7</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('8')">8</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('9')">9</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-secondary btn-block" onclick="appendToDisplay('/')">/</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('4')">4</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('5')">5</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('6')">6</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-secondary btn-block" onclick="appendToDisplay('*')">*</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('1')">1</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('2')">2</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('3')">3</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-secondary btn-block" onclick="appendToDisplay('-')">-</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('0')">0</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-block" onclick="appendToDisplay('.')">.</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-secondary btn-block" onclick="clearDisplay()">C</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-secondary btn-block" onclick="appendToDisplay('+')">+</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-success btn-block" onclick="calculate()">=</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-secondary btn-block" onclick="backspace()">←</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
