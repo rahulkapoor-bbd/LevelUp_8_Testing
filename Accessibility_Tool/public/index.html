@@ -19,12 +19,12 @@
     </style>
   </head>
   <body>
-    <div class="container-sm">
-      <div class="card my-5 p-3 bg-dark text-light">
-        <div class="card-body">
+    <section class="container-sm">
+      <article class="card my-5 p-3 bg-dark text-light">
+        <article class="card-body">
           <h2 class="mb-3">Website Accessibility Tester</h2>
           <form id="form">
-            <div class="input-group mb-3">
+            <section class="input-group mb-3">
               <input
                 type="url"
                 id="url"
@@ -32,7 +32,7 @@
                 placeholder="Enter a website..."
               />
               <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+            </section>
           </form>
           <button id="clearResults" class="btn btn-danger hideButton">
             Clear Results
@@ -40,17 +40,17 @@
           <button id="csvBtn" class="btn btn-warning hideButton">
             Download Csv
           </button>
-        </div>
-      </div>
+        </article>
+      </article>
 
-      <div class="loader text-center">
+      <section class="loader text-center">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
-      <div id="number"></div>
-      <div id="issues"></div>
-    </div>
+      </section>
+      <h4 id="number"></h4>
+      <h5 id="issues"></h5>
+    </section>
 
     <script src="js/main.js"></script>
   </body>
