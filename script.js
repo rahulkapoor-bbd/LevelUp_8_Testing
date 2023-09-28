@@ -1,4 +1,13 @@
-const statusDisplay = document.querySelector('.game--status');
+let statusDisplay;
+
+if (typeof window !== 'undefined'){
+    statusDisplay = document.querySelector('.game--status');
+    document?.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+    document?.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+    console.log('Running in a browser');
+}else{
+    console.log('Running local no screen bra');
+}
 
 let gameActive = true;
 let currentPlayer = "X";
@@ -8,7 +17,7 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
-statusDisplay.innerHTML = currentPlayerTurn();
+// statusDisplay.innerText = statusDisplay.innerText !== null ? currentPlayerTurn() : null;
 
 const winningConditions = [
     [0, 1, 2],
@@ -21,17 +30,34 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-function handleCellPlayed(clickedCell, clickedCellIndex) {
+function handleCellPlayed(clickedCell, clickedCellIndex, isTest=false) {
+    
+    if(isTest){
+        gameState[clickedCellIndex] = currentPlayer;
+        return gameState;
+    }
+    
     gameState[clickedCellIndex] = currentPlayer;
     clickedCell.innerText = currentPlayer;
 }
 
-function handlePlayerChange() {
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerText = currentPlayerTurn();
+function handlePlayerChange(isTest=false) {
+    if (isTest){
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        return currentPlayer;
+    }else{
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        statusDisplay.innerText = currentPlayerTurn();
+    }
+    
 }
 
-function handleResultValidation() {
+function handleResultValidation(isTest=false, setGameState=null) {
+    
+    if(setGameState){
+        gameState = setGameState
+    }
+
     let roundWon = false;
     for(let i = 0; i <= 7; i++) {
         const winCondition = winningConditions[i];
@@ -44,6 +70,10 @@ function handleResultValidation() {
             roundWon = true;
             break
         }
+    }
+
+    if(isTest){
+        return roundWon;
     }
 
     if(roundWon) {
@@ -73,14 +103,20 @@ function handleCellClick(clickedCellEvent) {
     handleResultValidation();
 }
 
-function handleRestartGame() {
+function handleRestartGame(isTest=false) {
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
+    if(isTest){
+        return gameState
+    }
     statusDisplay.innerText = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerText = "");
 }
 
-
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+module.exports={
+    handleCellPlayed,
+    handlePlayerChange,
+    handleResultValidation,
+    handleRestartGame
+}
