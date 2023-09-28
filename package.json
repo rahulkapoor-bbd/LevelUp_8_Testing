@@ -6,7 +6,8 @@
   "scripts": {
     "test-unit": "npx jasmine",
     "server": "node server.js",
-    "game": "node play_game.js"
+    "game": "node play_game.js",
+    "test-visual": "npx percy exec -- node percy.config.js"
   },
   "keywords": [],
   "author": "",
