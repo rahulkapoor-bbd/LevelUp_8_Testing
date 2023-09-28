@@ -2,7 +2,6 @@ const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
 const chromeOptions = new chrome.Options();
-// chromeOptions.setBinaryPath('C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe');
 
 let driver = new webdriver.Builder()
     .forBrowser('chrome')
