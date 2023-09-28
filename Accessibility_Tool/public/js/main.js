@@ -1,20 +1,35 @@
 const issuesOutput = document.querySelector("#issues");
 const issuesCount = document.querySelector("#number");
-const alertMessage =
-  '<div class="alert alert-danger" role="alert">Something went wrong</div>';
-const emptyUrl =
-  '<div class="alert alert-danger" role="alert">Please add an URL</div>';
-const warningMessage =
-  '<div class="alert alert-warning" role="alert">no Issues Found</div>';
-const CsvMessage =
-  '<div class="alert alert-warning" role="alert">CSV not available</div>';
+const alertContainer = document.createElement("div");
+const alertMessage = document.createElement("div");
+const emptyUrl = document.createElement("div");
+const warningMessage = document.createElement("div");
+const CsvMessage = document.createElement("div");
+
+// Add classes and roles to the alert messages
+alertContainer.className = "alert-container";
+alertMessage.className = "alert alert-danger";
+alertMessage.setAttribute("role", "alert");
+emptyUrl.className = "alert alert-danger";
+emptyUrl.setAttribute("role", "alert");
+warningMessage.className = "alert alert-warning";
+warningMessage.setAttribute("role", "alert");
+CsvMessage.className = "alert alert-warning";
+CsvMessage.setAttribute("role", "alert");
+
+// Set the text content for the alert messages
+alertMessage.textContent = "Something went wrong";
+emptyUrl.textContent = "Please add an URL";
+warningMessage.textContent = "No issues found";
+CsvMessage.textContent = "CSV not available";
 
 // Fetch accessibility issues
 const testAccessibility = async (e) => {
   e.preventDefault();
   const url = document.querySelector("#url").value;
   if (url === "") {
-    issuesOutput.innerHTML = emptyUrl;
+    clearAlerts();
+    issuesOutput.appendChild(emptyUrl);
   } else {
     setLoading();
 
@@ -22,7 +37,8 @@ const testAccessibility = async (e) => {
 
     if (response.status !== 200) {
       setLoading(false);
-      issuesOutput.innerHTML = alertMessage;
+      clearAlerts();
+      issuesOutput.appendChild(alertMessage);
     } else {
       const { issues } = await response.json();
       addIssuesToDOM(issues);
@@ -33,20 +49,23 @@ const testAccessibility = async (e) => {
   }
 };
 
-//Download CSV
+// Download CSV
 const csvIssues = async (e) => {
   e.preventDefault();
   const url = document.querySelector("#url").value;
   if (url === "") {
-    issuesOutput.innerHTML = emptyUrl;
+    clearAlerts();
+    issuesOutput.appendChild(emptyUrl);
   } else {
     const response = await fetch(`/api/test?url=${url}`);
 
     if (response.status !== 200) {
       setLoading(false);
-      alert(csvMessage);
+      clearAlerts();
+      issuesOutput.appendChild(alertMessage);
     } else if (issues.length === 0) {
-      alert(CsvMessage);
+      clearAlerts();
+      issuesOutput.appendChild(CsvMessage);
     } else {
       const { issues } = await response.json();
       const csv = issues
@@ -69,33 +88,35 @@ const csvIssues = async (e) => {
 
 // Add issues to DOM
 const addIssuesToDOM = (issues) => {
-  issuesOutput.innerHTML = "";
-  issuesCount.innerHTML = "";
+  clearAlerts();
+  issuesCount.textContent = "";
 
   if (issues.length === 0) {
-    issuesOutput.innerHTML = warningMessage;
+    issuesOutput.appendChild(warningMessage);
   } else {
-    issuesCount.innerHTML = `
-      <p class="alert alert-warning">${issues.length} issues found !</p>
-    `;
+    issuesCount.textContent = `${issues.length} issues found!`;
     issues.forEach((issue) => {
-      const output = `
-        <div class="card mb-5">
-          <div class="card-body">
-            <h4>${issue.message}</h4>
+      const card = document.createElement("div");
+      card.className = "card mb-5";
+      const cardBody = document.createElement("div");
+      cardBody.className = "card-body";
 
-            <p class="bg-light p-3 my-3">
-              ${escapeHTML(issue.context)}
-            </p>
+      const h4 = document.createElement("h4");
+      h4.textContent = issue.message; // Use textContent directly
+      cardBody.appendChild(h4);
 
-            <p class="bg-secondary text-light p-2">
-              CODE: ${issue.code}
-            </p>
-          </div>
-        </div>
-      `;
+      const p1 = document.createElement("p");
+      p1.className = "bg-light p-3 my-3";
+      p1.textContent = issue.context; // Use textContent directly
+      cardBody.appendChild(p1);
 
-      issuesOutput.innerHTML += output;
+      const p2 = document.createElement("p");
+      p2.className = "bg-secondary text-light p-2";
+      p2.textContent = `CODE: ${issue.code}`;
+      cardBody.appendChild(p2);
+
+      card.appendChild(cardBody);
+      issuesOutput.appendChild(card);
     });
   }
 };
@@ -105,10 +126,18 @@ const setLoading = (isLoading = true) => {
   const loader = document.querySelector(".loader");
   if (isLoading) {
     loader.style.display = "block";
-    issuesOutput.innerHTML = "";
+    clearAlerts();
   } else {
     loader.style.display = "none";
   }
+};
+
+// Clear alert messages
+const clearAlerts = () => {
+  const existingAlerts = document.querySelectorAll(".alert-container");
+  existingAlerts.forEach((alert) => {
+    issuesOutput.removeChild(alert);
+  });
 };
 
 // Escape HTML
@@ -121,11 +150,11 @@ function escapeHTML(html) {
     .replace(/'/g, "&#039;");
 }
 
-//Clear results
+// Clear results
 const clearResults = (e) => {
   e.preventDefault();
-  issuesOutput.innerHTML = "";
-  issuesCount.innerHTML = "";
+  issuesOutput.textContent = "";
+  issuesCount.textContent = "";
   document.querySelector("#url").value = "";
 };
 
