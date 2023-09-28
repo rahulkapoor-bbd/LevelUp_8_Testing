@@ -1,10 +1,11 @@
 let statusDisplay;
 
 if (typeof window !== 'undefined'){
+    console.log('Running in a browser today');
     statusDisplay = document.querySelector('.game--status');
-    document?.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-    document?.querySelector('.game--restart').addEventListener('click', handleRestartGame);
-    console.log('Running in a browser');
+    document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+    document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+    
 }else{
     console.log('Running local no screen bra');
 }
@@ -107,16 +108,20 @@ function handleRestartGame(isTest=false) {
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
-    if(isTest){
+    
+    if(isTest===true){
         return gameState
     }
+
     statusDisplay.innerText = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerText = "");
 }
 
-module.exports={
-    handleCellPlayed,
-    handlePlayerChange,
-    handleResultValidation,
-    handleRestartGame
+if (typeof window === 'undefined'){
+    module.exports={
+        handleCellPlayed,
+        handlePlayerChange,
+        handleResultValidation,
+        handleRestartGame
+    }
 }

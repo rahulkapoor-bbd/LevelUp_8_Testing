@@ -1,4 +1,4 @@
-const { handleCellPlayed, handlePlayerChange, handleResultValidation, handleRestartGame } = require('../script')
+const { handleCellPlayed, handlePlayerChange, handleResultValidation, handleRestartGame } = require('../public/script')
 
 // Test state update
 // Test player change
