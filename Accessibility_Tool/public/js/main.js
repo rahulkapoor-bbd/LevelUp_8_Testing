@@ -1,10 +1,10 @@
 const issuesOutput = document.querySelector("#issues");
 const issuesCount = document.querySelector("#number");
-const alertContainer = document.createElement("div");
-const alertMessage = document.createElement("div");
-const emptyUrl = document.createElement("div");
-const warningMessage = document.createElement("div");
-const CsvMessage = document.createElement("div");
+const alertContainer = document.createElement("article");
+const alertMessage = document.createElement("article");
+const emptyUrl = document.createElement("article");
+const warningMessage = document.createElement("article");
+const CsvMessage = document.createElement("article");
 
 // Add classes and roles to the alert messages
 alertContainer.className = "alert-container";
