@@ -23,12 +23,12 @@ const winningConditions = [
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
-    clickedCell.innerHTML = currentPlayer;
+    clickedCell.innerText = currentPlayer;
 }
 
 function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerHTML = currentPlayerTurn();
+    statusDisplay.innerText = currentPlayerTurn();
 }
 
 function handleResultValidation() {
@@ -47,14 +47,14 @@ function handleResultValidation() {
     }
 
     if(roundWon) {
-        statusDisplay.innerHTML = winningMessage();
+        statusDisplay.innerText = winningMessage();
         gameActive = false;
         return;
     }
 
     const roundDraw = !gameState.includes("");
     if(roundDraw) {
-        statusDisplay.innerHTML = drawMessage();
+        statusDisplay.innerText = drawMessage();
         gameActive = false;
         return;
     }
@@ -77,8 +77,8 @@ function handleRestartGame() {
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
-    statusDisplay.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    statusDisplay.innerText = currentPlayerTurn();
+    document.querySelectorAll('.cell').forEach(cell => cell.innerText = "");
 }
 
 
