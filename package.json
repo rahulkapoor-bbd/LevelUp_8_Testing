@@ -1,0 +1,16 @@
+{
+  "name": "levelup_8_testing",
+  "version": "1.0.0",
+  "description": "Simple tic-tac-toe game built using HTML, CSS, and JavaScript. For more information about the game, click [here](https://en.wikipedia.org/wiki/Tic-tac-toe).",
+  "main": "script.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "jasmine": "^5.1.0"
+  }
+}
