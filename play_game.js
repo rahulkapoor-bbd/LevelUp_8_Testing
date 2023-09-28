@@ -18,35 +18,17 @@ driver.findElement(webdriver.By.className(targetClass)).then((element) => {
     element.findElements(webdriver.By.css("div")).then(async (cells) => {
         const elements = await Promise.all(cells);
         // Player 1 win
-        cells[0].click()
-        cells[1].click()
-        cells[3].click()
-        cells[4].click()
-        cells[6].click()
-        cells[8].click()
+        click(elements,0,1,3,4,6,8)
 
         let resetButton = await driver.findElement(webdriver.By.className("game--restart"))
         resetButton.click();
-
+        
         // Player 2 win
-        cells[1].click()
-        cells[0].click()
-        cells[4].click()
-        cells[3].click()
-        cells[8].click()
-        cells[6].click()
-
+        click(elements,1,0,4,3,2,6)
         resetButton.click();
 
-        cells[0].click()
-        cells[3].click()
-        cells[1].click()
-        cells[2].click()
-        cells[6].click()
-        cells[7].click()
-        cells[5].click()
-        cells[4].click()
-        cells[8].click()
+        //Draw
+        click(elements,0,3,1,2,6,7,5,4,8)
 
     }).catch((error) => {
         console.error(`Error finding inner div elements: ${error}`);
@@ -55,4 +37,17 @@ driver.findElement(webdriver.By.className(targetClass)).then((element) => {
     console.error(`Error finding element with class ${targetClass}: ${error}`);
 });
 
-
+function click(cells, x1,o1,x2,o2,x3,o3,x4=-1,o4=-1,x5=-1){
+  cells[x1].click()
+  cells[o1].click()
+  cells[x2].click()
+  cells[o2].click()
+  cells[x3].click()
+  cells[o3].click()
+  if(x4===-1){
+    return
+  }
+  cells[x4].click()
+  cells[o4].click()
+  cells[x5].click()
+}
