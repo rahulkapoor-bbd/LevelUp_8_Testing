@@ -4,7 +4,9 @@
   "description": "Simple tic-tac-toe game built using HTML, CSS, and JavaScript. For more information about the game, click [here](https://en.wikipedia.org/wiki/Tic-tac-toe).",
   "main": "script.js",
   "scripts": {
-    "test": "npx jasmine"
+    "test-unit": "npx jasmine",
+    "server": "node server.js",
+    "game": "node play_game.js"
   },
   "keywords": [],
   "author": "",
