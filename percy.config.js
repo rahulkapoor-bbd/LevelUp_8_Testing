@@ -1,8 +1,6 @@
 const PercyScript = require('@percy/script');
 
-// Define your function to capture snapshots
 async function captureSnapshots(page, percySnapshot) {
-  // Set the viewport size for each snapshot
 
   await page.goto('https://d22wq9bg4uf9wu.cloudfront.net/');
 
@@ -18,12 +16,10 @@ async function captureSnapshots(page, percySnapshot) {
   await page.setViewport({ width: 1080, height: 1920 });
   await percySnapshot('Tick Tack Toe at 1080x1920');
 
-  // Add more viewport sizes as needed
 }
 
-// Run your function using PercyScript
 PercyScript.run(captureSnapshots);
 
 module.exports = {
-  captureSnapshots // Export your function if needed
+  captureSnapshots 
 };
