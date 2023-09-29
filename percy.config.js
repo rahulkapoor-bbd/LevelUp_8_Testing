@@ -2,7 +2,7 @@ const PercyScript = require('@percy/script');
 
 async function captureSnapshots(page, percySnapshot) {
 
-  await page.goto('https://d22wq9bg4uf9wu.cloudfront.net/');
+  await page.goto('https://escconf.com');
 
   await page.setViewport({ width: 20, height: 80 });
   await percySnapshot('Tick Tack Toe at 20x80');
